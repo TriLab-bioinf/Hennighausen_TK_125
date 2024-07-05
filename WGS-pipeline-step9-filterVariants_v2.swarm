@@ -1,0 +1,4 @@
+#SWARM -t 20 -g 32 --time 2-00:00:00
+
+sh WGS-pipeline-step9-filterVariants_RNASEQ_v2.sh 
+

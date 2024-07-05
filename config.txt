@@ -1,0 +1,50 @@
+##############################################################
+# Parameters for SNP identification pipeline for RNAseq data #
+##############################################################
+
+# Expected format for fastq file name: 
+# ${SAMPLE}_R1_001.fastq.gz 
+# ${SAMPLE}_R2_001.fastq.gz
+
+# Input files with path to each fastq file for forward and reverse reads
+
+INPUTFILE_1=/data/WGS-BE/COVID_SNP/Family_WGS/input-1.txt
+INPUTFILE_2=/data/WGS-BE/COVID_SNP/Family_WGS/input-2.txt
+
+
+# GATK resource bundle (it has to use the exact genome assembly version as the STAR database used for mapping
+GENOME=/home/lorenziha/data/Lothar_Hennighausen/TK_125/reference/human_g1k_v37_decoy.fa
+KNOWN_SNP_SITES=/fdb/GATK_resource_bundle/hg38/dbsnp_138.hg38.vcf.gz
+
+# Control what STEPs should be run (set to true). Processes can only be stopped (set to false) fromthe bottom up.
+# E.g. by setting STEP4=false the pipeline will run only STEP1-3 processes.
+# To speed up the workflow, it is recommended to run several instances of the pipeline, each on a subset of samples 
+# with STEP8 and STEP9 set to false and then run the last two steps individually on all samples. In this case, you should use different
+# configuration files for each run pointing at different input files and using a different directory name for saving log files (see LOG_DIR below)
+STEP1=true
+STEP2=true
+STEP3=true
+STEP4=true
+STEP5=true
+STEP6=true
+STEP7=true
+STEP8=true
+STEP9=true
+
+# Workflow log files
+LOG_DIR=00-workflow-log
+
+STEP1_LOG=WGS-pipeline-step1-fastqc.log
+STEP2_LOG=WGS-pipeline-step2-mapping.log
+STEP3_LOG=WGS-pipeline-step3-split.log
+STEP4_LOG=WGS-pipeline-step4-cleanBAM.log
+STEP5_LOG=WGS-pipeline-step5-markDuplicates
+STEP6_LOG=WGS-pipeline-step6-recalibration-all.log
+STEP7_LOG=WGS-pipeline-step7-split-recalibrated.log
+STEP8_LOG=WGS-pipeline-step8-variantCalling.log
+STEP9_LOG=WGS-pipeline-step9-filterVariants.log
+
+
+
+
+
